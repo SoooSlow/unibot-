@@ -1,11 +1,12 @@
 /* BASE */
 const discord = require("discord.js");
 const clientDiscord = new discord.Client();
+const cfg = require("./config.json");
 
 /* VARIABLES */
 var logs;
-const prefix = "?";
-const token = process.env.KEY;
+const prefix = "§";
+const token = cfg.token;
 const botname = "UniBot";
 const version = "0.1.0";
 var logchannelid = "464151393297498129";
