@@ -44,7 +44,7 @@ clientDiscord.on("message", message => {
                 if (args[1] === "on") logs = true & message.channel.sendMessage("Les logs Unilogs sont désormais activés !");
                 if(args[1] === "off") logs = false & message.channel.sendMessage("Les logs Unilogs sont désormais désactivés !");
                 if(args[1] === "status"){
-                    if(logs) message.channel.sendMessage("Les logs Unilogs sont activés.");
+                    if(logs === true) message.channel.sendMessage("Les logs Unilogs sont activés.");
                     else message.channel.sendMessage("Les logs Unilogs sont désactivés.");
                 }
             }
