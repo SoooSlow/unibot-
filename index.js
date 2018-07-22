@@ -38,7 +38,7 @@ clientDiscord.on("message", message => {
     if (command === "addbot"){
         message.reply("Commande indisponible pour le moment !")
     }
-    if(message.member.hasPermission(ADMINISTRATOR)){
+    if(message.member.hasPermission("ADMINISTRATOR")){
         if (command === "logs"){
             if (args.length === 1){
                 if (args[1] === "on") logs = true & message.channel.sendMessage("Les logs Unilogs sont désormais activés !");
