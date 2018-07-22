@@ -62,10 +62,11 @@ clientDiscord.on("message", message => {
         }
         if (command === "prefix"){
             if (args.length === 2){
-                prefix = args[1]
+                prefix = args[1];
                 message.channel.sendMessage("Le prefix de " + botname + " est désormais " + args[1] + " !");
                 clientDiscord.user.setGame(prefix + "help || " + clientDiscord.guilds.size + " serveurs");
             }
+            else message.reply("Dépassement des arguments !");
         }
     }
 });
