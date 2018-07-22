@@ -16,6 +16,7 @@ clientDiscord.login(token);
 /* FONCTIONS */
 clientDiscord.on("ready", () => {
     console.log(botname + " est prêt à travailler !");
+    clientDiscord.status(1);
 });
 
 clientDiscord.on("message", message => {
@@ -28,7 +29,7 @@ clientDiscord.on("message", message => {
             .setDescription("Voici la liste des commandes !")
             .setFooter(botname + " Private Edition || " + version)
             .addField("§help", "Affiche la page d'aide.", false)
-            .addField("§addbot", "Ajouter le bot sur votre serveur. (Non disponible)", false)
+            .addField("§addbot", "Ajouter le bot sur votre serveura. (Non disponible)", false)
             .setColor("0x000000");
         message.channel.sendEmbed(helppage);
     }
