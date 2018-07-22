@@ -40,7 +40,7 @@ clientDiscord.on("message", message => {
     }
     if(message.member.hasPermission("ADMINISTRATOR")){
         if (command === "logs"){
-            if (args.length === 1){
+            if (args.length === 2){
                 if (args[1] === "on") logs = true & message.channel.sendMessage("Les logs Unilogs sont désormais activés !");
                 if(args[1] === "off") logs = false & message.channel.reply("Les logs Unilogs sont désormais désactivés !");
                 if(args[1] === "status"){
@@ -51,7 +51,7 @@ clientDiscord.on("message", message => {
             else message.reply("Dépassement des arguments !");
         }
         if(command === "logsid"){
-            if (args.length === 1){
+            if (args.length === 2){
                 logchannelid = args[1]
                 message.channel.sendMessage("Les logs se feront désormais dans le channel <#" + logchannelid + "> !")
             }
