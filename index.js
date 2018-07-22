@@ -22,10 +22,8 @@ clientDiscord.on("ready", () => {
 clientDiscord.on("message", message => {
     if (message.author.bot || !message.content.startsWith(prefix)) return;
     const args = message.content.substring(prefix.length).split(" ");
-    if (message.content === prefix + "help"){
-        if(logs){
-            
-        }
+    const command = args[0];
+    if (command === "help"){
         var helppage = new discord.RichEmbed()
             .setTitle("Aide")
             .setDescription("Voici la liste des commandes !")
@@ -37,11 +35,12 @@ clientDiscord.on("message", message => {
             .setColor("0x000000");
         message.channel.sendEmbed(helppage);
     }
-    if (message.content === prefix + "addbot"){
-        message.reply("Cette commande n'est pas encore disponible !");
+    if (command === "addbot"){
+        message.reply("Commande indisponible pour le moment !");
     }
-    if(message.content === prefix + "logs"){
-        message.reply(args[1])
-        message.reply(args[0])
+    if (command === "logs"){
+        if (args[1] === "on") logs = true;
+        else logs = false;
+        message.reply("Les logs sont désormais sur " + logs);
     }
 });
