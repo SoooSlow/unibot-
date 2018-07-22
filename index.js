@@ -8,7 +8,7 @@ const prefix = "§";
 const token = process.env.KEY;
 const botname = "UniBot";
 const version = "0.1.0";
-const logchannelid = "464151393297498129";
+var logchannelid = "464151393297498129";
 
 /* CONNEXION */
 clientDiscord.login(token);
@@ -17,13 +17,11 @@ clientDiscord.login(token);
 clientDiscord.on("ready", () => {
     console.log(botname + " est prêt à travailler !");
     clientDiscord.user.setGame(prefix + "help || " + clientDiscord.guilds.size + " serveurs");
-    clientDiscord.user.setPresence("dnd");
 });
 
 clientDiscord.on("message", message => {
     if (message.author.bot || !message.content.startsWith(prefix)) return;
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
+    const args = message.content.substring(prefix.length).split(" ");
     if (message.content === prefix + "help"){
         if(logs){
             
@@ -34,10 +32,19 @@ clientDiscord.on("message", message => {
             .setFooter(botname + " Private Edition || " + version)
             .addField("§help", "Affiche la page d'aide.", false)
             .addField("§addbot", "Ajouter le bot sur votre serveur. (Non disponible)", false)
+            .addField("§logs on/off", "Activer ou désactiver les logs.", false)
+            .addField("§logsid", "Changer l'id du channel des logs.", false)
             .setColor("0x000000");
         message.channel.sendEmbed(helppage);
     }
     if (message.content === prefix + "addbot"){
         message.reply("Cette commande n'est pas encore disponible !");
+    }
+    if(message.content === prefix + "logs"){
+        if (args.length === 1){
+            if (args[1] === "on")
+            message.reply("ON")
+            else(message.reply("OFF"));
+        }
     }
 });
