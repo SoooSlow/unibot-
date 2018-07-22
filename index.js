@@ -17,6 +17,15 @@ clientDiscord.on("ready", () => {
     console.log(botname + " est prêt à travailler !");
 });
 
-clientDiscord.on("message", () => {
-    
+clientDiscord.on("message", message => {
+    if (message.content === prefix + "help"){
+        var helppage = new discord.MessageEmbed()
+            .setTitle("Aide")
+            .setDescription(botname + " Private Edition | " + version)
+            .addField("§help", "Affiche la page d'aide.", false)
+            .addField("command", "text", false)
+            .setColor("000000");
+
+    }
+
 });
