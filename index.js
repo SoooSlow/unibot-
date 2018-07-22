@@ -41,10 +41,7 @@ clientDiscord.on("message", message => {
         message.reply("Cette commande n'est pas encore disponible !");
     }
     if(message.content === prefix + "logs"){
-        if (args.length === 1){
-            if (args[1] === "on")
-            message.reply("ON")
-            else(message.reply("OFF"));
-        }
+        message.reply(args[1])
+        message.reply(args[0])
     }
 });
