@@ -17,6 +17,7 @@ clientDiscord.login(token);
 clientDiscord.on("ready", () => {
     console.log(botname + " est prêt à travailler !");
     clientDiscord.user.setGame(prefix + "help || " + clientDiscord.guilds.size + " serveurs");
+    clientDiscord.user.setPresence("dnd");
 });
 
 clientDiscord.on("message", message => {
