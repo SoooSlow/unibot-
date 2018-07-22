@@ -25,7 +25,7 @@ clientDiscord.on("message", message => {
             .addField("§help", "Affiche la page d'aide.", false)
             .addField("command", "text", false)
             .setColor("000000");
-
+        channel.sendMessage(helppage);
     }
 
 });
