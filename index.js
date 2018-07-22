@@ -30,17 +30,32 @@ clientDiscord.on("message", message => {
             .setFooter(botname + " Private Edition || " + version)
             .addField("§help", "Affiche la page d'aide.", false)
             .addField("§addbot", "Ajouter le bot sur votre serveur. (Non disponible)", false)
-            .addField("§logs on/off", "Activer ou désactiver les logs.", false)
-            .addField("§logsid", "Changer l'id du channel des logs.", false)
+            .addField("§logs on/off/status", "Activer ou désactiver les logs. (Permissions => ADMINISTRATOR)", false)
+            .addField("§logsid", "Changer l'id du channel des logs. (Permissions => ADMINISTRATOR)", false)
             .setColor("0x000000");
         message.channel.sendEmbed(helppage);
     }
     if (command === "addbot"){
-        message.reply("Commande indisponible pour le moment !");
+        message.reply("Commande indisponible pour le moment !")
     }
-    if (command === "logs"){
-        if (args[1] === "on") logs = true;
-        else logs = false;
-        message.reply("Les logs sont désormais sur " + logs);
+    if(message.member.hasPermission(ADMINISTRATOR)){
+        if (command === "logs"){
+            if (args.length === 1){
+                if (args[1] === "on") logs = true & message.channel.sendMessage("Les logs Unilogs sont désormais activés !");
+                if(args[1] === "off") logs = false & message.channel.reply("Les logs Unilogs sont désormais désactivés !");
+                if(args[1] === "status"){
+                    if(logs) message.channel.sendMessage("Les logs Unilogs sont activés.");
+                    else message.channel.sendMessage("Les logs Unilogs sont désactivés.");
+                }
+            }
+            else message.reply("Dépassement des arguments !");
+        }
+        if(command === "logsid"){
+            if (args.length === 1){
+                logchannelid = args[1]
+                message.channel.sendMessage("Les logs se feront désormais dans le channel <#" + logchannelid + "> !")
+            }
+            else message.reply("Dépassement des arguments !");
+        }
     }
 });
