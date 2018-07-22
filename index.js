@@ -3,8 +3,8 @@ const discord = require("discord.js");
 const clientDiscord = new discord.Client();
 
 /* VARIABLES */
-var logs = false;
-const prefix = "§";
+var logs;
+const prefix = "?";
 const token = process.env.KEY;
 const botname = "UniBot";
 const version = "0.1.0";
@@ -28,10 +28,11 @@ clientDiscord.on("message", message => {
             .setTitle("Aide")
             .setDescription("Voici la liste des commandes !")
             .setFooter(botname + " Private Edition || " + version)
-            .addField("§help", "Affiche la page d'aide.", false)
-            .addField("§addbot", "Ajouter le bot sur votre serveur. (Non disponible)", false)
-            .addField("§logs on/off/status", "Activer ou désactiver les logs. (Permissions => ADMINISTRATOR)", false)
-            .addField("§logsid", "Changer l'id du channel des logs. (Permissions => ADMINISTRATOR)", false)
+            .addField(prefix + "help", "Affiche la page d'aide.", false)
+            .addField(prefix + "addbot", "Ajouter le bot sur votre serveur. (Non disponible)", false)
+            .addField(prefix + "logs on/off/status", "Activer ou désactiver les logs. (Permissions => ADMINISTRATOR)", false)
+            .addField(prefix + "logsid", "Changer l'id du channel des logs. (Permissions => ADMINISTRATOR)", false)
+            .addField(prefix + "prefix", "Changer le prefix du bot. (Permissions => ADMINISTRATOR)", false)
             .setColor("0x000000");
         message.channel.sendEmbed(helppage);
     }
@@ -44,7 +45,9 @@ clientDiscord.on("message", message => {
                 if (args[1] === "on") logs = true & message.channel.sendMessage("Les logs Unilogs sont désormais activés !");
                 if(args[1] === "off") logs = false & message.channel.sendMessage("Les logs Unilogs sont désormais désactivés !");
                 if(args[1] === "status"){
-                    if(logs === true) message.channel.sendMessage("Les logs Unilogs sont activés.");
+                    if(logs === true){ 
+                        message.channel.sendMessage("Les logs Unilogs sont activés.");
+                    }
                     else message.channel.sendMessage("Les logs Unilogs sont désactivés.");
                 }
             }
@@ -53,9 +56,16 @@ clientDiscord.on("message", message => {
         if(command === "logsid"){
             if (args.length === 2){
                 logchannelid = args[1]
-                message.channel.sendMessage("Les logs se feront désormais dans le channel <#" + logchannelid + "> !")
+                message.channel.sendMessage("Les logs se feront désormais dans le channel <#" + logchannelid + "> !");
             }
             else message.reply("Dépassement des arguments !");
+        }
+        if (command === "prefix"){
+            if (args.length === 2){
+                prefix = args[1]
+                message.channel.sendMessage("Le prefix de " + botname + " est désormais " + args[1] + " !");
+                clientDiscord.user.setGame(prefix + "help || " + clientDiscord.guilds.size + " serveurs");
+            }
         }
     }
 });
